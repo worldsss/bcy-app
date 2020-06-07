@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RecommendPage from '../views/main-page/recommend-page'
+import ImgInput from '../views/user-publish/img-input'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/recommend-page',
     component: RecommendPage
+  },
+  {
+    path:'/img-input',
+    component:ImgInput
   }
 ]
 
