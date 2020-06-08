@@ -204,10 +204,10 @@
             } else {
 
               //显示加载
-              this.isLoading = true
+            /*  this.isLoading = true
 
               //加载模态框
-              this.uploadLoading = true;
+              this.uploadLoading = true;*/
 
               //把在可编辑div中的值给要上传的值
               // this.proContent.prInfo = this.texts
@@ -222,38 +222,49 @@
 
               //把查看的状态登录可见或所有人可见
               this.proContent.uid = this.$store.state.user.uid;
+              //允许登录访问或者所有人可见的权限
               this.proContent.prPermission = this.radio;
-              if (this.reprintUpload[2] == "禁止未授权转载") {
+
+
+              //禁止转载
+              if (this.allowTransshipment == true){
                 this.proContent.prReprint = 1;
               }
-              if (this.reprintUpload[2] == "禁止修改") {
+              //禁止修改
+              if (this.allowAmend == true){
                 this.proContent.prReprint = 2;
               }
-              if (this.reprintUpload[2] == "禁止未授权转载" && this.reprintUpload[3] == "禁止修改") {
+              //即禁止转载又禁止修改
+              if(this.allowTransshipment == true && this.allowAmend == true){
                 this.proContent.prReprint = 3;
               }
-              if (this.reprintUpload[3] == "禁止未授权转载" && this.reprintUpload[2] == "禁止修改") {
-                this.proContent.prReprint = 3;
-              }
-              if (this.checkList[0] == "允许右键") {
+              //允许保存图片
+              if (this.allowCopy == true){
                 this.proContent.prIsSave = 1;
-              } else {
+              }else {
                 this.proContent.prIsSave = 0;
               }
+
               //如果图片简介默认为空时，填写发布图片
               if (this.proContent.prInfo == "" || this.proContent.prInfo == null) {
                 this.proContent.prInfo = "发布图片"
               }
 
+
+
+
               /*插入图片作品*/
               axios.post("/api/insertProContent", this.proContent)
                   .then(res => {
 
-                    this.proImgs.proImgStrings = this.imgName
+                    // this.proImgs.proImgStrings = this.imgName
+                    this.proImgs.proImgStrings = this.allUploadImgName
                     console.log("这里是所有的上传的图片");
 
+
                     /*最新的插入图片，直接把图片list传到后台*/
-                    axios.post("/api/insertImgsList", this.proImgs)
+                    // axios.post("/api/insertImgsList", this.proImgs)
+                    this.$axioss.post("/api/insertImgsListByApp", this.proImgs)
                         .then(res => {
                           console.log("插入图片成功")
                           if (res.data != 0) {
@@ -314,33 +325,43 @@
       },
       //vant的上传图片事件
       afterRead(file) {
-       /* // 此时可以自行将文件上传至服务器
-        console.log(file);
-        // this.proImgs.proImgStrings = this.imgName
+
+
+        //把文件中的所有文件的名称赋值到allUpload中
         for (var i=0;i<file.length;i++){
           this.allUploadImgName[i] = file[i].file.name
         }
 
-        this.proImgs.proImgStrings = this.allUploadImgName
-        console.log("这里是所有的上传的图片");
+        console.log("这里是所有文件的名称");
+        console.log(this.allUploadImgName)
 
-        //插入图片作品
-        axios.post("/api/insertProContent", this.proContent)
-        .then(res =>{
+        /* // 此时可以自行将文件上传至服务器
+         console.log(file);
+         // this.proImgs.proImgStrings = this.imgName
+         for (var i=0;i<file.length;i++){
+           this.allUploadImgName[i] = file[i].file.name
+         }
+
+         this.proImgs.proImgStrings = this.allUploadImgName
+         console.log("这里是所有的上传的图片");
+
+         //插入图片作品
+         axios.post("/api/insertProContent", this.proContent)
+         .then(res =>{
 
 
-          /!*最新的插入图片，直接把图片list传到后台*!/
-          axios.post("/api/insertImgsListByApp", this.proImgs)
-              .then(res => {
-                if (res.data != 0) {
-                  //获取最新的prid
-                  console.log("插入图片成功")
+           /!*最新的插入图片，直接把图片list传到后台*!/
+           axios.post("/api/insertImgsListByApp", this.proImgs)
+               .then(res => {
+                 if (res.data != 0) {
+                   //获取最新的prid
+                   console.log("插入图片成功")
 
-                  var prid = res.data
-                }
-              })
+                   var prid = res.data
+                 }
+               })
 
-        })*/
+         })*/
         console.log(file)
         //把所有的图片循环插入到后台中
         for (var i=0;i<file.length;i++){
@@ -358,7 +379,6 @@
           } else {
             //上传不添加水印的图片
             this.$axioss.post("/api/uploads", fd)
-                // this.$axioss.post("http://localhost:8090/uploads", fd)
                 .then(res => {
 
                 })

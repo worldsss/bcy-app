@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RecommendPage from '../views/main-page/recommend-page'
 import ImgInput from '../views/user-publish/img-input'
+import UserRegister from '../views/user-page/user-register'
+import UserPage from '../views/main-page/user-page'
+import QuestionPage from '../views/main-page/question-page'
 
 Vue.use(VueRouter)
 
@@ -10,7 +13,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: RecommendPage
   },
   {
     path: '/about',
@@ -27,6 +30,18 @@ const routes = [
   {
     path:'/img-input',
     component:ImgInput
+  },
+  {
+    path:'/user-register',
+    component:UserRegister
+  },
+  {
+    path:'/user-page',
+    component:UserPage
+  },
+  {
+    path:'/question-page',
+    component:QuestionPage
   }
 ]
 
