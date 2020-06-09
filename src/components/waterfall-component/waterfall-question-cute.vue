@@ -34,7 +34,7 @@
                  </slot>
                </el-col>
                 <!--当前问答的回答的首图-->
-               <el-col :span="2" v-if="leftSpan!=18">
+               <el-col :span="2" v-if="leftSpan!=17">
                  <slot name="question-firstImg"></slot>
                </el-col>
               </el-row>
@@ -74,7 +74,7 @@
             </el-col>
           </el-row>
         </el-col>
-        <el-col :span="rightSpan" v-if="leftSpan==18">
+        <el-col :span="rightSpan" v-if="leftSpan==17">
           <slot name="question-firstImg"></slot>
         </el-col>
       </el-row>

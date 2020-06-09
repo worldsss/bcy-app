@@ -138,6 +138,7 @@
 
         }
       },
+      //右边的长度
       isQuestionCuteColRight(){
         return function (item) {
           //当前作品没有首图的话
@@ -156,6 +157,7 @@
 
         }
       },
+      //左边的长度
       isQuestionCuteColLeft(){
         return function (item) {
           //当前作品没有首图的话
@@ -163,13 +165,14 @@
             if (item.quIndex != null) {
               //当前作品的回答有首图的话
               if (item.quIndex.quFirstImg != null) {
-                return 24
+                return 22
               } else {
-                return 18
+                return 24
               }
             }
           }else {
-            return 18
+            //当前问答有首图
+            return 17
           }
 
         }

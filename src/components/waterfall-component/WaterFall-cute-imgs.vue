@@ -233,7 +233,7 @@
                     </slot>
                 </div>
 
-
+                <!--用户点赞，访问，评论，收藏的显示-->
                 <el-row :gutter="10" style="width: 90%;margin: 0 auto;text-align: center">
                     <el-col :span="6">
                       <!--  <el-link icon="el-icon-star-off" @click="userCollect()" :underline="false" type="info">

@@ -72,7 +72,9 @@
         <el-link @click="clickUserGivelike(item.proIndex)"
                  :underline="false"
                  type="info">
-          <i class="el-icon-magic-stick" :class="item.proIndex.prIsGivelike==1?'givelike-icon':''"></i>
+<!--          <i class="el-icon-magic-stick" :class="item.proIndex.prIsGivelike==1?'givelike-icon':''"></i>-->
+<!--          <i class="like-o" :class="item.proIndex.prIsGivelike==1?'givelike-icon':''"></i>-->
+          <van-icon name="like-o" :class="item.proIndex.prIsGivelike==1?'givelike-icon':''"></van-icon>
           {{item.proIndex.prGivelike}}
         </el-link>
       </span>
@@ -80,7 +82,7 @@
 
 
       <!--文字作品-->
-      <water-fall-text-cute  v-if="item.pcIndex!=null">
+      <water-fall-text-cute v-if="item.pcIndex!=null">
         <img width="40"
              height="40"
              style="border-radius: 50%"
@@ -251,8 +253,9 @@
 
         //打开新的页面显示内容
         // let routeData = this.$router.resolve({path: '/content/' + index});
-        let routeData = this.$router.resolve({path: '/text-content/' + index});
+        let routeData = this.$router.resolve({path: '/text-content-page/' + index});
         window.open(routeData.href, '_blank');
+       // this.$router.replace("/text-content-page/"+index)
 
       },
       //用户收藏
@@ -303,7 +306,7 @@
         }
 
       },
-      clickUserCollectPcid(index){
+      clickUserCollectPcid(index) {
         console.log("点击了没有啊")
         console.log(index)
         this.userCollectPcid.pcid = index.pcid
@@ -404,7 +407,7 @@
         }
       },
       //文字作品点赞
-      clickUserGivelikePcid(item){
+      clickUserGivelikePcid(item) {
         console.log("点击了没有？")
         console.log(item)
         this.userGivelike.pcid = item.pcid;
@@ -421,9 +424,9 @@
                         item.pcGivelike = res.data
                         item.pcIsGivelike = 1
                         this.$message({
-                          type:"success",
-                          message:'感谢你的点赞！',
-                          offset:100
+                          type: "success",
+                          message: '感谢你的点赞！',
+                          offset: 100
                         })
 
                       })
@@ -436,9 +439,9 @@
                         item.pcGivelike = res.data
                         item.pcIsGivelike = 0
                         this.$message({
-                          type:"success",
-                          message:'取消点赞',
-                          offset:100
+                          type: "success",
+                          message: '取消点赞',
+                          offset: 100
                         })
                       })
                 }
@@ -465,7 +468,7 @@
 
       },
       //跳转到图片作品具体页面
-      gotoImgContent(index){
+      gotoImgContent(index) {
         this.userVisitByPrid.uid = this.$store.state.user.uid
         this.userVisitByPrid.prid = index
         axios.post("/api/insertUserVisitByPridAndUid", this.userVisitByPrid)
@@ -473,8 +476,10 @@
               console.log("访问量增加")
             })
 
-        let routeData = this.$router.resolve({path: '/content/' + index});
+        // let routeData = this.$router.resolve({path: '/content/' + index});
+        let routeData = this.$router.resolve({path: '/img-content-page/' + index});
         window.open(routeData.href, '_blank');
+        // this.$router.replace("/img-content-page/" + index)
       },
     },
     hrefContent(index) {

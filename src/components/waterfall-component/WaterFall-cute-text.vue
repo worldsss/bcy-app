@@ -51,7 +51,7 @@
                 <slot name="img-content"></slot>
             </div>
 
-            <div style="padding: 14px 14px 0px 14px;">
+            <div style="padding: 14px 14px 0px 14px;margin: 10px auto">
 
 
                 <!-- 标签插槽-->
@@ -59,11 +59,8 @@
 
                 </slot>
                 <br>
-                <ul class="img-ul">
+              <!--  <ul class="img-ul">
                     <li class="img-li">
-                      <!--  <el-link icon="el-icon-star-off" :underline="false" type="info">
-                            <slot name="img-collect"></slot>
-                        </el-link>-->
                         <slot name="img-collect" icon="el-icon-star-off"
                               :underline="false" type="info">
                         </slot>
@@ -79,13 +76,37 @@
                         </el-link>
                     </li>
                     <li class="img-li">
-                       <!-- <el-link icon="el-icon-magic-stick" :underline="false" type="info">
-                            <slot name="img-click"></slot>
-                        </el-link>-->
-                      <slot name="img-click"></slot>
 
+                      <slot name="img-click"></slot>
                     </li>
-                </ul>
+                </ul>-->
+
+              <!--用户点赞，访问，评论，收藏的显示-->
+              <el-row :gutter="10" style="width: 90%;margin: 5px auto;text-align: center">
+                <el-col :span="6">
+
+                  <slot name="img-collect" icon="el-icon-star-off"
+                        @click="userCollect()"
+                        :underline="false" type="info">
+                  </slot>
+                </el-col>
+                <el-col :span="6">
+                  <el-link icon="el-icon-position" :underline="false" type="info">
+                    <slot name="img-go"></slot>
+                  </el-link>
+                </el-col>
+                <el-col :span="6">
+                  <el-link icon="el-icon-chat-line-round" :underline="false" type="info">
+                    <slot name="img-comment"></slot>
+                  </el-link>
+                </el-col>
+                <el-col :span="6">
+                  <slot name="img-click"></slot>
+                </el-col>
+              </el-row>
+
+
+
             </div>
         </el-card>
 
